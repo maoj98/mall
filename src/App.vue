@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
-        <p>111</p>
-    </div>
-    <router-view/>
+    <router-view></router-view>
+    <tabbar/>
   </div>
 </template>
-
+<script>
+import tabbar from "@/components/common/tabbar"
+export default {
+  components: {
+    tabbar
+  }
+}
+</script>
 <style>
 @import "assets/css/base.css";
 </style>
