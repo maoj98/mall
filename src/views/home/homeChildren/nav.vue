@@ -26,13 +26,15 @@ export default {
 <style  lang="less" scoped>
   .navList {
     display: flex;
+    margin-bottom: 10px;
+    background-color: #fff;
     div {
       flex: 1;
       text-align: center;
       padding: 10px 0;
       img{
-        width: 80%;
-        // margin-left: 10%;
+        width: 80%; 
+        margin-bottom: 10px;
       }
     }
   }

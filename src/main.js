@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import '@/assets/css/iconfont.css'
 import { Button, Swipe, SwipeItem } from 'vant'
+import 'vant/lib/index.less'
 Vue.use(Button)
 Vue.use(Swipe);
 Vue.use(SwipeItem);
