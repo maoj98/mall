@@ -1,13 +1,81 @@
 <template>
-  <p>1111</p>
+  <van-tabs v-model="active"  @click="getList('',1)">
+    <van-tab v-for="(item,value) in List" :key="value" :title="item" class="item">
+      <div v-for="item in tabList" :key="item.iid" class="itemList">
+        <img :src="item.show.img" alt="">
+        <p> {{item.title}}</p>
+        <div>
+          <span>
+          {{item.price}}
+        </span>
+        <span>
+          {{item.cfav}}
+        </span>
+        </div>
+        
+       
+      </div>
+    </van-tab>
+  </van-tabs>
 </template>
 
 <script>
+import request from "@/network/request"
 export default {
-
+ data() {
+    return {
+      active: 0,
+     
+    };
+  },
+  props: {
+    List: {},
+    tabList: {}
+  },
+  created(){
+    // this.getList()
+   
+  },
+  methods: {
+    getList(list,page) {
+      this.$emit("name",event.toElement.innerText),
+      this.$emit("page",0)
+    }
+  }
+  
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.van-tab--active {
+   color: 'red' !important;
+ }
 
+ .item {
+  background-color: #fff;
+   .itemList {
+     display: inline-block;
+     margin: 1%;
+     width: 48%;
+     position: relative;
+     img {
+       width: 100%;
+     }
+     p{
+      overflow:hidden; //超出文本隐藏
+      white-space:nowrap; //溢出不换行
+      text-overflow:ellipsis; //溢出省略号显示
+      font-size: 12px;
+     }
+     div {
+       text-align: center;
+      span {
+        display: inline-block;
+        margin: 0 5px;
+        font-size: 12px;
+      }
+     }
+     
+   }
+ }
 </style>
