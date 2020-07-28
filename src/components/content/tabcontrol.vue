@@ -1,20 +1,30 @@
 <template>
   <van-tabs v-model="active"  @click="getList('',1)">
     <van-tab v-for="(item,value) in List" :key="value" :title="item" class="item">
-      <div v-for="item in tabList" :key="item.iid" class="itemList">
-        <img :src="item.show.img" alt="">
-        <p> {{item.title}}</p>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :immediate-check="false"
+        finished-text="没有更多了"
+        v-on:load="onLoad()"
+        :offset="10"
+      >
+       <div  v-for="item in tabList" :key="item.iid"  class="itemList">
         <div>
+          <img :src="item.show.img" alt="">
+          <p> {{item.title}}</p>
+          <div>
+            <span>
+            {{item.price}}
+          </span>
           <span>
-          {{item.price}}
-        </span>
-        <span>
-          {{item.cfav}}
-        </span>
+            {{item.cfav}}
+          </span>
+          </div>
         </div>
-        
-       
       </div>
+      
+      </van-list>
     </van-tab>
   </van-tabs>
 </template>
@@ -25,7 +35,8 @@ export default {
  data() {
     return {
       active: 0,
-     
+      loading: false,
+      finished: false,
     };
   },
   props: {
@@ -40,6 +51,11 @@ export default {
     getList(list,page) {
       this.$emit("name",event.toElement.innerText),
       this.$emit("page",0)
+    },
+    onLoad() {
+      // this.page++;
+      // this.getroadList();
+      console.log(111)
     }
   }
   
@@ -78,4 +94,8 @@ export default {
      
    }
  }
+//  /deep/.van-tab__pane {
+//    height: 500px;
+//    overflow: hidden;
+//  }
 </style>

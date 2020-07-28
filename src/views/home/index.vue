@@ -6,24 +6,20 @@
       </div>
     </navbar>
     <!-- 轮播图 -->
-    <swiper :banner="banners"></swiper> 
-    <!-- 轮播图下列表 -->
-    <navList :nav="nav"></navList>
-    <fashion/>
-    <TabControl class="tabcontrol" :List="['流行','新款','精选']" @name="tabLists" @page='pages' :tabList="tabList"></TabControl>
-    <p>111</p>
-    <p>111</p>
-    <p>111</p>
-    <p>111</p>
-    <p>111</p>
-    <p>111</p>
-    <p>111</p>
+    <betterSCroll >
+      <swiper :banner="banners"></swiper> 
+      <!-- 轮播图下列表 -->
+      <navList :nav="nav"></navList>
+      <fashion/>
+      <TabControl class="tabcontrol" :List="['流行','新款','精选']" @name="tabLists" @page='pages' :tabList="tabList"></TabControl>
+    </betterSCroll>
   </div>
 </template>
 
 <script>
 import request from "@/network/request"
 import navbar from "@/components/common/navbar/index"
+import betterSCroll from "@/components/common/scroll/index"
 import TabControl from "@/components/content/tabcontrol"
 import swiper from "@/views/home/homeChildren/homeSwiper"
 import navList from "@/views/home/homeChildren/nav"
@@ -80,6 +76,7 @@ created(){
   },
   components: {
     navbar,
+    betterSCroll,
     TabControl,
     swiper,
     navList,
@@ -97,7 +94,7 @@ created(){
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 9;
     background-color: #FF8198;
     color: #fff;
   }
@@ -105,6 +102,6 @@ created(){
 /deep/.van-tabs__wrap {
     position: sticky ;
     top: 44px ;
-    z-index: 1;
+    z-index: 9;
   }
     </style>
