@@ -1,14 +1,14 @@
 <template>
   <van-tabs v-model="active"  @click="getList('',1)">
     <van-tab v-for="(item,value) in List" :key="value" :title="item" class="item">
-      <van-list
+      <!-- <van-list
         v-model="loading"
         :finished="finished"
         :immediate-check="false"
         finished-text="没有更多了"
         v-on:load="onLoad()"
         :offset="10"
-      >
+      > -->
        <div  v-for="item in tabList" :key="item.iid"  class="itemList">
         <div>
           <img :src="item.show.img" alt="">
@@ -24,7 +24,7 @@
         </div>
       </div>
       
-      </van-list>
+      <!-- </van-list> -->
     </van-tab>
   </van-tabs>
 </template>
@@ -35,8 +35,8 @@ export default {
  data() {
     return {
       active: 0,
-      loading: false,
-      finished: false,
+      // loading: false,
+      // finished: false,
     };
   },
   props: {
@@ -47,16 +47,21 @@ export default {
     // this.getList()
    
   },
+  mounted(){
+      
+  },
   methods: {
     getList(list,page) {
       this.$emit("name",event.toElement.innerText),
+      // this.$emit("name",(event.toElement.innerText,1)),
+      // this.$emit("name",("1111","2222")),
       this.$emit("page",0)
     },
-    onLoad() {
-      // this.page++;
-      // this.getroadList();
-      console.log(111)
-    }
+    // onLoad() {
+    //   // this.page++;
+    //   // this.getroadList();
+    //   console.log(111)
+    // }
   }
   
 }

@@ -6,12 +6,12 @@
       </div>
     </navbar>
     <!-- 轮播图 -->
-    <betterSCroll >
+    <betterSCroll @tabLists="tabLists">
       <swiper :banner="banners"></swiper> 
       <!-- 轮播图下列表 -->
       <navList :nav="nav"></navList>
       <fashion/>
-      <TabControl class="tabcontrol" :List="['流行','新款','精选']" @name="tabLists" @page='pages' :tabList="tabList"></TabControl>
+      <TabControl class="tabcontrol" :List="['流行','新款','精选']" @name="tabLists(arguments)" @page='pages' :tabList="tabList"></TabControl>
     </betterSCroll>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
       banners: '',
       nav: '',
       type: 'pop',
-      tabList: '',
+      tabList: [],
       page: 1
     }
   },
@@ -48,14 +48,18 @@ created(){
       })
      
     },
-    tabLists(data) {
-      if(data == "流行") {
+    tabLists(msg) {
+      // console.log(msg[0],msg[1])
+      if(msg == "流行") {
         this.type = 'pop'
-      }else if (data == "新款") {
+      }else if (msg == "新款") {
         this.type = 'new'
       }else {
         this.type = 'sell'
       }
+      // if(this.page == 1) {
+      //   this.tabList = []
+      // }
         request({
         url: '/home/data',
         params: {
@@ -63,11 +67,14 @@ created(){
           page: this.page
         }
       }).then(res=> {
-        this.tabList = res.data.list
-        console.log(this.page)
+        // this.tabList = res.data.list
+        console.log(this.tabList)
+        console.log(typeof(res.data.list))
+        // push(...goodsList)
+        this.tabList.push(...res.data.list)
+        // console.log(this.page)
         this.page+=1
-        console.log(this.page)
-
+        // console.log(this.page)
       })
     },
     pages(data) {
