@@ -9,7 +9,7 @@
         v-on:load="onLoad()"
         :offset="10"
       > -->
-       <div  v-for="item in tabList" :key="item.iid"  class="itemList">
+       <div  v-for="item in tabList" :key="item.link"  class="itemList">
         <div>
           <img :src="item.show.img" alt="">
           <p> {{item.title}}</p>
@@ -51,11 +51,13 @@ export default {
       
   },
   methods: {
-    getList(list,page) {
-      this.$emit("name",event.toElement.innerText),
+    getList(list) {
+       console.log(event.toElement.innerText)
+      this.$emit("page",1),
+      this.$emit("name",event.toElement.innerText)
+     
       // this.$emit("name",(event.toElement.innerText,1)),
       // this.$emit("name",("1111","2222")),
-      this.$emit("page",0)
     },
     // onLoad() {
     //   // this.page++;

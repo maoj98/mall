@@ -11,7 +11,7 @@
       <!-- 轮播图下列表 -->
       <navList :nav="nav"></navList>
       <fashion/>
-      <TabControl class="tabcontrol" :List="['流行','新款','精选']" @name="tabLists(arguments)" @page='pages' :tabList="tabList"></TabControl>
+      <TabControl class="tabcontrol" :List="['流行','新款','精选']" @page='pages'  @name="tabLists"   :tabList="tabList"></TabControl>
     </betterSCroll>
   </div>
 </template>
@@ -49,17 +49,17 @@ created(){
      
     },
     tabLists(msg) {
-      // console.log(msg[0],msg[1])
-      if(msg == "流行") {
+      console.log(msg)
+      if(msg === "流行") {
         this.type = 'pop'
-      }else if (msg == "新款") {
+      }else if (msg === "新款") {
         this.type = 'new'
-      }else {
+      }else if (msg === "精选"){
         this.type = 'sell'
+      }else {
+        this.type = this.type
       }
-      // if(this.page == 1) {
-      //   this.tabList = []
-      // }
+      console.log(this.type)
         request({
         url: '/home/data',
         params: {
@@ -79,6 +79,8 @@ created(){
     },
     pages(data) {
       this.page = data
+      this.tabList = []
+      console.log(111)
     }
   },
   components: {
