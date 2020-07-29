@@ -20,24 +20,18 @@ export default {
     __initScroll() {
       this.$nextTick(() => {
         //$refs绑定元素
-        if (!this.scroll) {
-          this.scroll = new BScroll(this.$refs.wrapper, {
-            click: true,
-            pullUpLoad: {
-              threshold: -30 // 当上拉距离超过30px时触发 pullingUp 事件
-            }
-          });
-        } else if (!this.$refs.wrapper) {
-          return;
-        } else {
-          this.scroll.refresh();
-        }
+        this.scroll = new BScroll(this.$refs.wrapper, {
+          click: true,
+          pullUpLoad: {
+            threshold: -30 // 当上拉距离超过30px时触发 pullingUp 事件
+          }
+        });
         this.scroll.on('pullingUp', () => {
             console.log('上拉加载');
             this.$emit('tabLists')
             this.scroll.finishPullUp();
         })
-
+        console.log(this.scroll)
       })
       
     },

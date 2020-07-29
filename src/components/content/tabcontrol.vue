@@ -1,17 +1,9 @@
 <template>
   <van-tabs v-model="active"  @click="getList('',1)">
     <van-tab v-for="(item,value) in List" :key="value" :title="item" class="item">
-      <!-- <van-list
-        v-model="loading"
-        :finished="finished"
-        :immediate-check="false"
-        finished-text="没有更多了"
-        v-on:load="onLoad()"
-        :offset="10"
-      > -->
        <div  v-for="item in tabList" :key="item.link"  class="itemList">
         <div>
-          <img :src="item.show.img" alt="">
+          <img :src="item.show.img" alt="" @load="loading">
           <p> {{item.title}}</p>
           <div>
             <span>
@@ -23,8 +15,6 @@
           </div>
         </div>
       </div>
-      
-      <!-- </van-list> -->
     </van-tab>
   </van-tabs>
 </template>
@@ -35,8 +25,6 @@ export default {
  data() {
     return {
       active: 0,
-      // loading: false,
-      // finished: false,
     };
   },
   props: {
@@ -44,8 +32,6 @@ export default {
     tabList: {}
   },
   created(){
-    // this.getList()
-   
   },
   mounted(){
       
@@ -55,15 +41,10 @@ export default {
        console.log(event.toElement.innerText)
       this.$emit("page",1),
       this.$emit("name",event.toElement.innerText)
-     
-      // this.$emit("name",(event.toElement.innerText,1)),
-      // this.$emit("name",("1111","2222")),
     },
-    // onLoad() {
-    //   // this.page++;
-    //   // this.getroadList();
-    //   console.log(111)
-    // }
+    loading() {
+      this.$bus.$emit("loading")
+    }
   }
   
 }

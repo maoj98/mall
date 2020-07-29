@@ -6,13 +6,14 @@
       </div>
     </navbar>
     <!-- 轮播图 -->
-    <betterSCroll @tabLists="tabLists">
+    <betterSCroll @tabLists="tabLists"  ref="scroll">
       <swiper :banner="banners"></swiper> 
       <!-- 轮播图下列表 -->
       <navList :nav="nav"></navList>
       <fashion/>
       <TabControl class="tabcontrol" :List="['流行','新款','精选']" @page='pages'  @name="tabLists"   :tabList="tabList"></TabControl>
     </betterSCroll>
+    <top @click.native="pullup"></top>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import request from "@/network/request"
 import navbar from "@/components/common/navbar/index"
 import betterSCroll from "@/components/common/scroll/index"
 import TabControl from "@/components/content/tabcontrol"
+import top from "@/components/content/pullup"
 import swiper from "@/views/home/homeChildren/homeSwiper"
 import navList from "@/views/home/homeChildren/nav"
 import fashion from "@/views/home/homeChildren/fashion"
@@ -36,7 +38,10 @@ export default {
   },
 created(){
     this.getList(),
-    this.tabLists("流行")
+    this.tabLists("流行"),
+    this.$bus.$on('loading',()=> {
+      this.$refs.scroll.scroll.refresh();
+    })
   },
   methods: {
     getList(){ 
@@ -81,12 +86,17 @@ created(){
       this.page = data
       this.tabList = []
       console.log(111)
+    },
+    pullup() {
+      // console.log(this.$refs.scroll.scroll)
+      this.$refs.scroll.scroll.scrollTo(0, 0, 500)
     }
   },
   components: {
     navbar,
     betterSCroll,
     TabControl,
+    top,
     swiper,
     navList,
     fashion

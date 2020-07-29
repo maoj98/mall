@@ -14,6 +14,9 @@ Vue.use(List);
 Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.config.productionTip = false
+
+
+Vue.prototype.$bus = new Vue()
 new Vue({
   router,
   store,
