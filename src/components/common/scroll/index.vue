@@ -21,8 +21,9 @@ export default {
       this.$nextTick(() => {
         //$refs绑定元素
         this.scroll = new BScroll(this.$refs.wrapper, {
-          click: true,
-          pullUpLoad: {
+            // click: true,
+            mouseWheel: true,
+            pullUpLoad: {
             threshold: -30 // 当上拉距离超过30px时触发 pullingUp 事件
           }
         });
@@ -31,7 +32,7 @@ export default {
             this.$emit('tabLists')
             this.scroll.finishPullUp();
         })
-        console.log(this.scroll)
+       
       })
       
     },

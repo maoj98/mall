@@ -1,6 +1,6 @@
 <template>
   <van-tabs v-model="active"  @click="getList('',1)">
-    <van-tab v-for="(item,value) in List" :key="value" :title="item" class="item">
+    <van-tab v-for="(item,value) in List"  :key="value" :title="item" class="item">
        <div  v-for="item in tabList" :key="item.link"  class="itemList">
         <div>
           <img :src="item.show.img" alt="" @load="loading">
@@ -38,10 +38,11 @@ export default {
   },
   methods: {
     getList(list) {
-       console.log(event.toElement.innerText)
+      console.log(event.toElement.innerText)
       this.$emit("page",1),
       this.$emit("name",event.toElement.innerText)
     },
+    // 监听图片加载完  
     loading() {
       this.$bus.$emit("loading")
     }
