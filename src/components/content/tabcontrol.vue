@@ -1,7 +1,7 @@
 <template>
-  <van-tabs v-model="active"  @click="getList('',1)">
-    <van-tab v-for="(item,value) in List"  :key="value" :title="item" class="item">
-       <div  v-for="item in tabList" :key="item.link"  class="itemList">
+  <van-tabs v-model="active" class="lll"  @click="getList('',1)" >
+    <van-tab v-for="(item,value) in List" :key="value" :title="item" class="item" ref="scrollY">
+       <div  v-for="item in tabList" :key="item.link"  class="itemList" @touchend="jumpXq(item)" @click="jumpXq(item)">
         <div>
           <img :src="item.show.img" alt="" @load="loading">
           <p> {{item.title}}</p>
@@ -35,16 +35,19 @@ export default {
   },
   mounted(){
       
+   
   },
   methods: {
     getList(list) {
-      console.log(event.toElement.innerText)
+       console.log(event.toElement.innerText)
       this.$emit("page",1),
       this.$emit("name",event.toElement.innerText)
     },
-    // 监听图片加载完  
     loading() {
       this.$bus.$emit("loading")
+    },
+    jumpXq(data) {
+      this.$router.push("/details/"+data.iid)
     }
   }
   
@@ -87,4 +90,8 @@ export default {
 //    height: 500px;
 //    overflow: hidden;
 //  }
+.lll {
+  position: relative;
+  z-index: 999;
+}
 </style>

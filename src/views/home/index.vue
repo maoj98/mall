@@ -11,7 +11,7 @@
       <!-- 轮播图下列表 -->
       <navList :nav="nav"></navList>
       <fashion />
-      <TabControl class="tabcontrol" :List="['流行','新款','精选']" @page='pages' @name="tabLists" :tabList="tabList"></TabControl>
+      <TabControl class="tabcontrol" :List="['流行','新款','精选']" @page='pages' @name="tabLists" :tabList="tabList" ref="tabTop"></TabControl>
     </betterSCroll>
     <top @click.native="pullup"></top>
   </div>
@@ -33,25 +33,30 @@ export default {
       nav: '',
       type: 'pop',
       tabList: [],
-      page: 1
+      page: 1,
+      tabTop1: 0
     }
   },
   created() {
     this.getList(),
-      this.tabLists("流行"),
-      // 监听图片加载完毕，刷新页面高度，避免上拉拉不动的现象
-      
-      this.$bus.$on('loading', () => {
-        this.$refs.scroll.scroll.refresh()
-        // this.debounse()
-        // // console.log(111)
-      })
+    this.tabLists("流行")
+   
+  },
+  mounted() {
+     // 监听图片加载完毕，刷新页面高度，避免上拉拉不动的现象
+    this.$bus.$on('loading', () => {
+      this.$refs.scroll.scroll.refresh()
+    })
+  
+  },
+  destroyed(){
+    console.log("111")
   },
   methods: {
-    // 防抖
-    debounse(dun) {
    
 
+    // 防抖
+    debounse(dun) {
     },
 
     getList() {
@@ -82,14 +87,8 @@ export default {
           page: this.page
         }
       }).then(res => {
-        // this.tabList = res.data.list
-        console.log(this.tabList)
-        console.log(typeof (res.data.list))
-        // push(...goodsList)
         this.tabList.push(...res.data.list)
-        // console.log(this.page)
         this.page += 1
-        // console.log(this.page)
       })
     },
     pages(data) {
@@ -126,11 +125,5 @@ export default {
   z-index: 9;
   background-color: #ff8198;
   color: #fff;
-}
-
-/deep/.van-tabs__wrap {
-  position: sticky;
-  top: 44px;
-  z-index: 9;
 }
 </style>

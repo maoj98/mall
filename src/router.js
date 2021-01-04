@@ -6,6 +6,7 @@ const Home = () => import('@/views/home')
 const item = () => import('@/views/item')
 const main = () => import('@/views/main')
 const shopcar = () => import('@/views/shopcar')
+const details = () => import('@/views/details/index')
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -34,5 +35,10 @@ export default new Router({
       name: 'main',
       component: main
     },
+    {
+      path: '/details/:id',
+      name: 'details',
+      component: details
+    }
   ]
 })
